@@ -81,7 +81,7 @@ export default function Navbar() {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="flex items-center space-x-3 p-1.5 pr-3  border border-slate-200 hover:border-brand-primary/40 bg-slate-50 hover:bg-white transition-all duration-200 cursor-pointer"
+                  className="flex items-center space-x-3 p-1.5 pr-3 rounded-3xl border border-slate-200 hover:border-brand-primary/40 bg-slate-50 hover:bg-white transition-all duration-200 cursor-pointer"
                 >
                   <div className="relative h-9 w-9 border-2 border-indigo-100 rounded-full overflow-hidden bg-slate-200">
                     <Image
