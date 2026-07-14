@@ -2,22 +2,28 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-
+import { usePathname, useRouter } from "next/navigation";
 import { HiMenuAlt3, HiX } from "react-icons/hi";
 import { FiUser, FiLogOut, FiLayers } from "react-icons/fi";
 import Logo from "../ui/logo";
+import { authClient, useSession } from "@/lib/auth-client";
+import Image from "next/image";
+
 
 export default function Navbar() {
+  const router = useRouter()
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true); // টেস্ট করার জন্য true রাখা হয়েছে
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
-  // ডামি ইউজার ডাটা
-  const user = {
-    name: "Tanvir Ahmed",
-    email: "tanvir@example.com",
-  };
+  const { data: session } = useSession()
+  const user = session?.user
+  // console.log(user);
+
+  const handleLogout = async () => {
+    await authClient.signOut()
+    router.push('/login')
+    router.refresh()
+  }
 
   const publicRoutes = [
     { name: "Home", path: "/" },
@@ -34,15 +40,15 @@ export default function Navbar() {
     { name: "About Us", path: "/about" },
   ];
 
-  const activeRoutes = isLoggedIn ? protectedRoutes : publicRoutes;
+  const activeRoutes = user ? protectedRoutes : publicRoutes;
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-100 font-sans">
 
       <div className="w-11/12 mx-auto">
         <div className="flex items-center justify-between h-20">
-          
-          {/* Reusable Premium Logo Component */}
+
+          {/* Reusable Logo */}
           <Logo />
 
           {/* Desktop Navigation Links */}
@@ -53,11 +59,10 @@ export default function Navbar() {
                 <Link
                   key={route.path}
                   href={route.path}
-                  className={`relative font-bold text-slate-300 transition-colors duration-200 py-1 ${
-                    isActive 
-                      ? "text-brand-primary nav-link-active" 
-                      : "text-slate-600 hover:text-brand-primary"
-                  }`}
+                  className={`relative font-bold transition-colors duration-200 py-1 ${isActive
+                    ? "text-brand-primary nav-link-active"
+                    : "text-slate-600 hover:text-brand-primary"
+                    }`}
                 >
                   {route.name}
                   {!isActive && (
@@ -70,47 +75,52 @@ export default function Navbar() {
 
           {/* Desktop Action Buttons  */}
           <div className="hidden md:flex items-center space-x-4">
-            {isLoggedIn ? (
+            {user ? (
               /* User Profile Dropdown */
               <div className="dropdown dropdown-end">
-                <div 
-                  tabIndex={0} 
-                  role="button" 
-                  className="flex items-center space-x-3 p-1.5 pr-3 rounded-lg border border-slate-200 hover:border-brand-primary/40 bg-slate-50 hover:bg-white transition-all duration-200 cursor-pointer"
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="flex items-center space-x-3 p-1.5 pr-3  border border-slate-200 hover:border-brand-primary/40 bg-slate-50 hover:bg-white transition-all duration-200 cursor-pointer"
                 >
-                  <div className="avatar placeholder">
-                    <div className="bg-gradient-to-tr from-brand-primary to-brand-secondary text-white font-bold rounded-md w-8 h-8">
-                      <span>{user.name.charAt(0)}</span>
-                    </div>
+                  <div className="relative h-9 w-9 border-2 border-indigo-100 rounded-full overflow-hidden bg-slate-200">
+                    <Image
+                      src={user?.image || '/images/user-icon-logo.png'}
+                      alt={user?.name || 'expense tracker user logo'}
+                      fill
+                      className="object-cover"
+                      sizes="36px"
+                      priority
+                    />
                   </div>
-                  <span className="text-sm font-bold text-slate-800">{user.name.split(" ")[0]}</span>
+                  <span className="text-sm font-bold text-slate-800">{user?.name.split(" ")[0]}</span>
                 </div>
-                
-                <ul 
-                  tabIndex={0} 
+
+                <ul
+                  tabIndex={0}
                   className="dropdown-content menu p-3 shadow-xl bg-white border border-slate-100 rounded-lg w-64 mt-3 z-50 animate-fadeIn"
                 >
                   <li className="px-3 py-2 border-b border-slate-100 mb-2 pointer-events-none">
-                    <p className="text-sm font-bold text-slate-800 p-0 m-0">{user.name}</p>
-                    <p className="text-xs text-slate-500 p-0 m-0 overflow-hidden text-ellipsis">{user.email}</p>
+                    <p className="text-sm font-bold text-slate-800 p-0 m-0">{user?.name}</p>
+                    <p className="text-xs text-slate-500 p-0 m-0 overflow-hidden text-ellipsis">{user?.email}</p>
                   </li>
-                  
+
                   <li>
                     <Link href="/profile" className="flex items-center space-x-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 hover:text-brand-primary font-medium text-sm">
-                      <FiUser className="w-4 h-4 text-slate-400" />
-                      <span>My Profile</span>
+                      <FiUser className="w-4 h-4 text-slate-900" />
+                      <span className="font-bold text-slate-600">My Profile</span>
                     </Link>
                   </li>
                   <li>
                     <Link href="/items/manage" className="flex items-center space-x-2 py-2.5 rounded-lg hover:bg-slate-50 text-slate-700 hover:text-brand-primary font-medium text-sm">
-                      <FiLayers className="w-4 h-4 text-slate-400" />
-                      <span>My Listings</span>
+                      <FiLayers className="w-4 h-4 text-slate-900" />
+                      <span className="font-bold text-slate-600">My Listings</span>
                     </Link>
                   </li>
                   <div className="h-px bg-slate-100 my-1.5"></div>
                   <li>
-                    <button 
-                      onClick={() => setIsLoggedIn(false)}
+                    <button
+                      onClick={handleLogout}
                       className="flex items-center space-x-2 py-2.5 rounded-lg hover:bg-rose-50 text-rose-600 font-semibold text-sm transition-colors"
                     >
                       <FiLogOut className="w-4 h-4 text-rose-500" />
@@ -120,7 +130,7 @@ export default function Navbar() {
                 </ul>
               </div>
             ) : (
-           
+
               <div className="flex items-center space-x-3">
                 {/* Transparent Border Button */}
                 <Link
@@ -163,35 +173,39 @@ export default function Navbar() {
                 key={route.path}
                 href={route.path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all ${
-                  isActive 
-                    ? "bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 text-brand-primary font-bold" 
-                    : "text-slate-700 hover:bg-slate-50 hover:text-brand-primary"
-                }`}
+                className={`block px-4 py-3 rounded-lg text-base font-semibold transition-all ${isActive
+                  ? "bg-gradient-to-r from-brand-primary/10 to-brand-secondary/10 text-brand-primary font-bold"
+                  : "text-slate-700 hover:bg-slate-50 hover:text-brand-primary"
+                  }`}
               >
                 {route.name}
               </Link>
             );
           })}
-          
+
           <div className="h-px bg-slate-100 my-3"></div>
-          
+
           <div className="px-4 pb-2">
-            {isLoggedIn ? (
+            {user ? (
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <div className="avatar placeholder">
-                    <div className="bg-gradient-to-tr from-brand-primary to-brand-secondary text-white font-bold rounded-lg w-10 h-10">
-                      <span>{user.name.charAt(0)}</span>
-                    </div>
+                  <div className="relative h-9 w-9 border-2 border-indigo-100 rounded-full overflow-hidden bg-slate-200">
+                    <Image
+                      src={user?.image || '/images/user-icon-logo.png'}
+                      alt={user?.name || 'expense tracker user logo'}
+                      fill
+                      className="object-cover"
+                      sizes="36px"
+                      priority
+                    />
                   </div>
                   <div>
                     <p className="text-sm font-bold text-slate-800 leading-tight">{user.name}</p>
-                    <p className="text-xs text-slate-500">{user.email}</p>
+                    <p className="text-xs text-slate-500">{user?.email}</p>
                   </div>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
-                  <Link 
+                  <Link
                     href="/profile"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center justify-center space-x-2 py-2.5 rounded-lg border border-slate-200 text-sm font-bold text-slate-700 bg-white"
@@ -200,7 +214,7 @@ export default function Navbar() {
                   </Link>
                   <button
                     onClick={() => {
-                      setIsLoggedIn(false);
+                      handleLogout()
                       setMobileMenuOpen(false);
                     }}
                     className="flex items-center justify-center space-x-2 py-2.5 rounded-lg bg-rose-50 text-sm font-bold text-rose-600"
