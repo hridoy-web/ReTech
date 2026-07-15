@@ -89,7 +89,7 @@ export default function LatestAdditions() {
                     <span className="text-[10px] text-slate-400 font-semibold block">Asking Price</span>
                     <span className="text-base font-black text-slate-900">${product.price}</span>
                   </div>
-                  <Link href={`/explore/${product.id}`} className="p-2 bg-slate-50 text-slate-600 hover:bg-indigo-600 hover:text-white rounded-xl transition-all border border-slate-200 group-hover:border-indigo-600">
+                  <Link href={`/explore`} className="p-2 bg-slate-50 text-slate-600 hover:bg-indigo-600 hover:text-white rounded-xl transition-all border border-slate-200 group-hover:border-indigo-600">
                     <FiEye className="w-4 h-4" />
                   </Link>
                 </div>
