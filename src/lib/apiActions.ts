@@ -1,7 +1,7 @@
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
 
 export interface Product {
-  _id: string; 
+  _id: string;
   title: string;
   description: string;
   price: number;
@@ -44,7 +44,7 @@ export const fetchProducts = async (filters: FetchFilters = {}): Promise<FetchPr
     if (filters.limit) queryParams.append("limit", filters.limit.toString());
 
     const res = await fetch(`${BASE_URL}/products?${queryParams.toString()}`, {
-      cache: "no-store", 
+      cache: "no-store",
     });
 
     if (!res.ok) throw new Error("Failed to fetch products");
@@ -123,3 +123,21 @@ export const deleteProduct = async (id: string) => {
     return { message: "Failed to delete item" };
   }
 };
+
+//6. Fetch the 4 latest product Home page
+export async function fetchLatestAdditions() {
+  try {
+    const res = await fetch(`${BASE_URL}/products/latest`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch latest additions");
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("fetchLatestAdditions error:", error);
+    return [];
+  }
+}
