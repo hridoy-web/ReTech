@@ -73,7 +73,7 @@ export default function ProductDetailsPage() {
   }
 
   const handleSuccess = () => {
-    toast.success('Message sent successfully!');
+    toast.success('Inquiry sent! The seller will reach out soon.');
   }
 
   return (

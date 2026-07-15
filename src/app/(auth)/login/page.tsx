@@ -41,8 +41,9 @@ export default function LoginPage() {
         return;
       } else {
         toast.success(`Welcome back ${data?.user?.name}`);
-        router.push("/");
-        router.refresh();
+        if (typeof window !== "undefined") {
+          window.location.href = "/";
+        }
       }
 
     } catch (error) {
