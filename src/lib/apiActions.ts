@@ -1,7 +1,5 @@
-// backend url 
 const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
 
-// Frontend Type Safety
 export interface Product {
   _id: string; 
   title: string;
@@ -32,8 +30,6 @@ interface FetchFilters {
   page?: number;
   limit?: number;
 }
-
-/************ All API Actions **************/
 
 // 1. Fetch All Products with filters, sorting & pagination
 export const fetchProducts = async (filters: FetchFilters = {}): Promise<FetchProductsResponse> => {
@@ -91,15 +87,26 @@ export const addProduct = async (productData: Omit<Product, "_id" | "createdAt">
 };
 
 // 4. GET - Fetch user's custom listed products (Manage Items page)
-export const fetchMyItems = async (email: string): Promise<Product[]> => {
+export const fetchMyItems = async (email: string | undefined | null): Promise<Product[]> => {
   try {
+    if (!email) {
+      console.warn("fetchMyItems: No email provided. Skipping API call.");
+      return [];
+    }
+
     const res = await fetch(`${BASE_URL}/products/my-items?email=${encodeURIComponent(email)}`, {
       cache: "no-store",
     });
-    if (!res.ok) throw new Error("Failed to fetch user products");
+
+    if (!res.ok) {
+      const errorData = await res.json().catch(() => ({}));
+      console.error("Backend error context:", errorData);
+      throw new Error(errorData.message || `HTTP error! Status: ${res.status}`);
+    }
+
     return await res.json();
   } catch (error) {
-    console.error("fetchMyItems error:", error);
+    console.error("fetchMyItems error details:", error);
     return [];
   }
 };
