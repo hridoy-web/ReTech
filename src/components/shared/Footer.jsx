@@ -28,7 +28,7 @@ export default function Footer() {
             {/* Social Icons */}
             <div className="flex space-x-4 pt-2">
               <a 
-                href="https://github.com" 
+                href="https://github.com/hridoy-web" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-brand-primary hover:border-brand-primary transition-all duration-200"
@@ -36,7 +36,7 @@ export default function Footer() {
                 <FiGithub className="w-5 h-5" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://linkedin.com/hridoy-chowdhury-web-dev" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="p-2.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:text-brand-primary hover:border-brand-primary transition-all duration-200"
