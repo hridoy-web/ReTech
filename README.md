@@ -1,84 +1,120 @@
-# 📱 ReTech | Sustainable Peer-to-Peer Gadget Marketplace
+# 📱 ReTech | Pre-Owned Gadget Marketplace
 
-[![Live Website](https://img.shields.io/badge/Live-Demo-4f46e5?style=for-the-badge&logo=vercel)](https://re-tech-phi.vercel.app)
-[![Frontend Repo](https://img.shields.io/badge/GitHub-Frontend-blue?style=for-the-badge&logo=github)](https://github.com/hridoy-web/ReTech)
-[![Backend Repo](https://img.shields.io/badge/GitHub-Backend-darkgreen?style=for-the-badge&logo=github)](https://github.com/hridoy-web/ReTech-Backend)
+A web platform where users can post their used tech gadgets for sale, and other users can find and buy necessary pre-owned items at affordable prices.
 
-**ReTech** is a premium, fully responsive, and secure peer-to-peer marketplace built to extend the lifecycle of premium tech gadgets. It bridges the gap between hardware enthusiasts looking to upgrade and buyers searching for high-quality, verified pre-owned hardware (Laptops, Monitors, Components, and Audio gear) at affordable prices.
-
----
-
-## 📸 Project Previews
-
-Here is a glance at the fully functional interface of ReTech:
-
-| **Home Landing Page** | **Latest Additions (Dynamic)** |
-|---|---|
-| ![Home Page](https://raw.githubusercontent.com/hridoy-web/ReTech/main/ReTech-Home.png) | ![Latest Additions](https://raw.githubusercontent.com/hridoy-web/ReTech/main/lateast-gadget.png) |
-
-| **Explore Catalog & Filters** | **Manage Inventory Dashboard** |
-|---|---|
-| ![Explore Catalog](https://raw.githubusercontent.com/hridoy-web/ReTech/main/gadget-explore.png) | ![Manage Inventory](https://raw.githubusercontent.com/hridoy-web/ReTech/main/manage-inventory.png) |
+### 🚀 Quick Links
+[![Live Demo](https://img.shields.io/badge/Live-Demo-4f46e5?style=for-the-badge&logo=vercel)](https://re-tech-phi.vercel.app)
+[![Client Repository](https://img.shields.io/badge/Client-Repository-blue?style=for-the-badge&logo=github)](https://github.com/hridoy-web/ReTech)
+[![Server Repository](https://img.shields.io/badge/Server-Repository-orange?style=for-the-badge&logo=github)](https://github.com/hridoy-web/ReTech-Backend)
 
 ---
 
-## ⚡ Key Features
+## 💻 Project Features
 
-- **🌐 Complete Responsiveness:** Implements pixel-perfect layout alignment optimized for Mobile, Tablet, and Desktop screens.
-- **🛡️ Secure Route Protection (Next.js 16 Proxy):** Utilizing the latest Next.js 16 `proxy.ts` middleware to protect details page access, item listings, and dashboards.
-- **🔄 BetterAuth Authentication:** Secure Login and Registration integration, complete with an **Interactive Demo Login Button** for one-click reviewer access.
-- **🔍 Advanced Search & Filter Pipeline:** Real-time search query matching with multiple filters (Category, Price range, and Sorting) directly integrated with MongoDB aggregation.
-- **📋 Seller Dashboard (Manage Items):** Allows users to view their active listings in a clean responsive data table and instantly delete obsolete listings with sweet toast status alerts.
-- **🍃 Eco-friendly Visuals & Glassmorphic UI:** Fully customized using Tailwind CSS v4, dynamic loaders (`loading.tsx`), and error boundaries.
+- **🛍️ Sell & Buy Gadgets:** Users can create posts to sell their pre-owned tech hardware. Buyers can browse listings to find budget-friendly items.
+- **📋 Manage Inventory:** Sellers can view all their active gadget posts in one dedicated space and instantly delete them if needed.
+- **🔍 Dynamic Explore Page:** Fully functional filtering pipeline driven by the backend. Users can search and sort gadgets based on parameters like Title, Category, and Maximum Price.
+- **🔥 Latest Additions Grid:** The home page displays a dynamic section rendering the 4 latest product listings directly fetched from the database.
+- **🛡️ Secure Access:** Features authentication flow using BetterAuth to secure specific item routing actions.
+
+---
+
+## 📸 Interface Previews & Screenshots
+
+### 🌐 Application Layouts
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <p align="center"><b>🏠 Landing / Home Interface</b></p>
+      <img src="https://github.com/hridoy-web/ReTech/blob/main/ReTech-Home.png?raw=true" alt="ReTech Home" width="100%"/>
+    </td>
+    <td width="50%">
+      <p align="center"><b>🔥 Latest Additions (Dynamic 4-Grid)</b></p>
+      <img src="https://github.com/hridoy-web/ReTech/blob/main/lateast-gadget.png?raw=true" alt="ReTech Latest Gadgets" width="100%"/>
+    </td>
+  </tr>
+</table>
+
+### 🔍 Explore Catalog & Inventory Workspaces
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <p align="center"><b>⚡ Gadget Explore Catalog (Search & Filters)</b></p>
+      <img src="https://github.com/hridoy-web/ReTech/blob/main/gadget-explore.png?raw=true" alt="ReTech Explore Page" width="100%"/>
+    </td>
+    <td width="50%">
+      <p align="center"><b>📋 Manage Inventory Page (Seller Panel)</b></p>
+      <img src="https://github.com/hridoy-web/ReTech/blob/main/manage-inventory.png?raw=true" alt="ReTech Manage Inventory" width="100%"/>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🧠 Personal Journey & Learnings
+
+> 💡 This project was specifically built to practice and get hands-on experience with **TypeScript**. 
+
+As my very first TypeScript full-stack project, I faced numerous configuration errors and syntax roadblocks along the way. However, debugging these strict type issues helped me understand the core foundations of type safety and robust code structure. I managed to successfully resolve the errors and fully complete the application. In the future, whenever I get more time, I plan to integrate additional systems and improve the codebase further.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### Frontend
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript *(Strict Type-Safety)*
-- **Authentication:** BetterAuth
-- **Styling:** Tailwind CSS v4 & DaisyUI
-- **Icons & Notifications:** React Icons, React Hot Toast
+### 💻 Frontend Architecture
+* ⚡ **Next.js 16** — React framework with App Routing and server rendering optimizations.
+* 🛡️ **TypeScript** — Strict type structures for reliable state properties and parameters.
+* 🔑 **BetterAuth** — Secure session orchestration for user authentication.
+* 🎨 **Tailwind CSS v4** — Modern utility-first CSS compilation engine.
+* 🌼 **DaisyUI** — Semantic component layouts built directly on Tailwind.
+* 🍞 **React Hot Toast** — Non-blocking dashboard status alerts and updates.
+* 📦 **React Icons** — Clean and lightweight vector glyph icons.
 
-### Backend
-- **Runtime & Framework:** Node.js, Express.js
-- **Language:** TypeScript
-- **Database:** MongoDB (via native MongoDB Driver & ODM)
-- **Hosting:** Vercel (Frontend), Render/Railway (Backend)
-
----
-
-## 🧠 Personal Journey & Challenging Part
-
-> 💡 **This project marks my first professional entry into the TypeScript Ecosystem!** As my very first full-fledged TypeScript project, transitioning from JavaScript was highly rewarding yet extremely challenging. I initially faced multiple hurdles regarding:
-- Strict type casting for backend dynamic API requests.
-- Typing search queries and database documents within Express handlers.
-- Configuring correct session structures in Next.js 16's updated `proxy.ts` model.
-
-**The Win:** Overcoming these runtime and static-type errors helped me gain a strong, structural grasp of enterprise full-stack development. I am proud to have completed a medium-level production-ready platform with solid type safety.
+### ⚙️ Backend & Database
+* 🟢 **Node.js** — Event-driven server runtime environment.
+* 🚂 **Express.js** — Fast, structural server middleware utilizing type-safe pipelines.
+* 🛡️ **TypeScript** — Enforced static types for models, server routing, and controller layers.
+* 🍃 **MongoDB** — Scalable NoSQL database utilizing native driver aggregation configurations.
 
 ---
 
-## 🚀 Future Enhancements & Roadmap
+## 💻 Complete Local Environment Setup & Launch Guide
 
-- [ ] **Interactive Visual Analytics:** Integrating `recharts` to render inventory statistics on the user's dashboard.
-- [ ] **Advanced Image Upload:** Implementing secure Cloudinary image uploading instead of manual URL input.
-- [ ] **TypeScript Deep Dive:** Further refactoring of API Action models to achieve 100% type-safety without using implicit `any`.
-- [ ] **Direct Chat Integration:** Direct P2P messaging support between interested buyers and sellers.
+Follow this single terminal guide to clone the repositories, configure all required environment variables, install dependencies, and run both frontend and backend concurrently.
 
----
-
-## 💻 Installation & Setup
-
-To run this project locally, follow these steps:
-
-### 1. Clone the Repositories
 ```bash
-# Clone frontend
-git clone [https://github.com/hridoy-web/ReTech.git](https://github.com/hridoy-web/ReTech.git)
+=========================================================================
+# STEP 1: CLONE REPOSITORIES & SET UP FRONTEND CLIENT
+=========================================================================
+git clone https://github.com/hridoy-web/ReTech.git
 cd ReTech
 
-# Clone backend
-git clone [https://github.com/hridoy-web/ReTech-Backend.git](https://github.com/hridoy-web/ReTech-Backend.git)
+# --- Create Frontend Environment File (.env) ---
+
+# ReTech Frontend Url
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URI=**YOUR_MONGODB_URI_HERE**
+DB_NAME=**YOUR_DATABASE_NAME_HERE**
+BETTER_AUTH_SECRET=**YOUR_BETTERAUTH_SECRET_KEY_HERE**
+GOOGLE_CLIENT_ID=**YOUR_GOOGLE_CLIENT_ID_HERE**
+GOOGLE_CLIENT_SECRET=**YOUR_GOOGLE_CLIENT_SECRET_HERE**
+NEXT_PUBLIC_IMGBB_API_KEY=**YOUR_IMGBB_API_KEY_HERE**
+NEXT_PUBLIC_BACKEND_API_URL=http://localhost:8000
+
+# Install frontend modules and run the client server
+npm install
+npm run dev
+
+=========================================================================
+# STEP 2: SET UP BACKEND SERVER ENVIRONMENT
+=========================================================================
+git clone https://github.com/hridoy-web/ReTech-Backend.git
+cd ReTech-Backend
+
+# --- Create Backend Environment File (.env) ---
+PORT=8000
+MONGO_URI=**YOUR_MONGODB_URI_HERE**
+
+# Install backend dependencies and launch the API gateway
+npm install
+npm run dev
